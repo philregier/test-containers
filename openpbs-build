@@ -5,5 +5,6 @@ RUN dnf install -y git hwloc-devel libedit-devel gcc make rpm-build libtool hwlo
   sendmail sudo tcl tk libical chkconfig
 RUN useradd -m unpriv
 USER unpriv
+WORKDIR /home/unpriv
 RUN git clone https://github.com/openpbs/openpbs.git
 WORKDIR /home/unpriv/openpbs
