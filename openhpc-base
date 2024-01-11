@@ -1,4 +1,4 @@
 FROM almalinux:8.5
 
 RUN yum install -y http://repos.openhpc.community/OpenHPC/2/CentOS_8/x86_64/ohpc-release-2-1.el8.x86_64.rpm
-RUN yum install -y openpbs-server-ohpc
+RUN yum install -y openpbs-server-ohpc podman-compose
