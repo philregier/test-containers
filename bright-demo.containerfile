@@ -1,6 +1,6 @@
 FROM rockylinux:9
 RUN dnf install -y git ansible-core
-RUN ansible-galaxy install brightcomputing.installer100
+RUN ansible-galaxy collection install brightcomputing.installer100
 RUN mkdir -p /ansible/group_vars
 WORKDIR /ansible
 COPY <<EOF group_vars/all
