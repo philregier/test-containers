@@ -1,4 +1,4 @@
-FROM ubi9:latest
+FROM rockylinux:9
 RUN dnf install -y git ansible-core
 RUN ansible-galaxy install brightcomputing.installer100
 RUN mkdir -p /ansible/group_vars
