@@ -1,4 +1,4 @@
-FROM rockylinux:9-ubi-init
+FROM rockylinux/rockylinux:9-ubi-init
 ARG CMKEY
 ARG CMPASS
 RUN dnf install -y git ansible-core mariadb-server
