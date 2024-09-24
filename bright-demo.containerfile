@@ -1,4 +1,6 @@
 FROM rockylinux:9
+ARG CMKEY
+ARG CMPASS
 RUN dnf install -y git ansible-core
 RUN ansible-galaxy collection install brightcomputing.installer100
 RUN mkdir -p /ansible/group_vars
