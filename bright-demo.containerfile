@@ -3,7 +3,8 @@ ARG CMKEY
 ARG CMPASS
 
 # Note below that the default python3-xmltodict is not usable by Ansible
-RUN dnf install -y git ansible-core mariadb-server # python3*-xmltodict python3*-jmespath
+RUN dnf install -y git ansible-core mariadb-server
+RUN AnsVer=$(ansible --version | gawk '/python.version/{print $4}' | cut -d . -f 1-2); dnf install python$AnsVer-{xmltodict,jmespath}
 RUN systemctl enable mariadb
 RUN ansible-galaxy collection install brightcomputing.installer100 community.general community.mysql community.crypto ansible.posix
 RUN mkdir -p /ansible/group_vars
@@ -14,7 +15,7 @@ install_medium: network\n\
 install_medium_network_packages:\n\
   - /etc/yum.repos.d/cm.repo" >group_vars/all
 
-RUN echo -e "[cm-rhel9-10.0-updates]\n\
+RUN echo -e "[cm-rhel8-10.0-updates]\n\
 name=Cluster Manager 10.0 for Red Hat Enterprise Linux 8 - Updates\n\
 # baseurl=http://updates.brightcomputing.com/yum/cm/10.0/$basearch/rhel/8/updates/\n\
 mirrorlist=http://updates.brightcomputing.com/yum/cm/10.0/$basearch/rhel/8/updates/mirrorlist\n\
