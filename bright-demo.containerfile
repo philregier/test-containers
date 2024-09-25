@@ -17,8 +17,8 @@ install_medium_network_packages:\n\
 
 RUN echo -e "[cm-rhel8-10.0-updates]\n\
 name=Cluster Manager 10.0 for Red Hat Enterprise Linux 8 - Updates\n\
-# baseurl=http://updates.brightcomputing.com/yum/cm/10.0/$basearch/rhel/8/updates/\n\
-mirrorlist=http://updates.brightcomputing.com/yum/cm/10.0/$basearch/rhel/8/updates/mirrorlist\n\
+# baseurl=http://updates.brightcomputing.com/yum/cm/10.0/\$basearch/rhel/8/updates/\n\
+mirrorlist=http://updates.brightcomputing.com/yum/cm/10.0/\$basearch/rhel/8/updates/mirrorlist\n\
 username=cm100user\n\
 password=$CMPASS\n\
 enabled=1\n\
