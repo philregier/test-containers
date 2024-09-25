@@ -28,7 +28,7 @@ RUN echo -e "---\n\
 - name: Install BCM admin node\n\
   hosts: all,localhost\n  gather_facts: true\n\
   pre_tasks:\n\
-    - service_facts\n\
+    - service_facts:\n\
   roles:\n\
     - role: brightcomputing.installer100.head_node" >site.yml
 #CMD ansible-playbook -i $(hostname), -c local site.yml
