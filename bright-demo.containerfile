@@ -3,8 +3,7 @@ ARG CMKEY
 ARG CMPASS
 
 # Note below that the default python3-xmltodict is not usable by Ansible
-RUN dnf install -y git ansible-core mariadb-server
-RUN dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+RUN dnf install -y git ansible-core mariadb-server https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 RUN AnsVer=$(ansible --version | gawk '/python.version/{print $4}' | cut -d . -f 1-2); dnf install python$AnsVer-{xmltodict,jmespath}
 RUN systemctl enable mariadb
 RUN ansible-galaxy collection install brightcomputing.installer100 community.general community.mysql community.crypto ansible.posix
