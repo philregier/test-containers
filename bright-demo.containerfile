@@ -13,7 +13,9 @@ WORKDIR /ansible
 RUN echo -e "product_key: $CMKEY\n\
 install_medium: network\n\
 install_medium_network_packages:\n\
-  - /etc/yum.repos.d/cm.repo" >group_vars/all
+  - /etc/yum.repos.d/cm.repo\n\
+license:
+  cluster_name: BCM install test container" >group_vars/all
 
 RUN echo -e "[cm-rhel8-10.0-updates]\n\
 name=Cluster Manager 10.0 for Red Hat Enterprise Linux 8 - Updates\n\
