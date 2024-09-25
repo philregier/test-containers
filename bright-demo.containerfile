@@ -3,7 +3,7 @@ ARG CMKEY
 ARG CMPASS
 
 # Note below that the default python3-xmltodict is not usable by Ansible
-RUN dnf install -y git ansible-core mariadb-server python3*-xmltodict python3*-jmespath
+RUN dnf install -y git ansible-core mariadb-server # python3*-xmltodict python3*-jmespath
 RUN systemctl enable mariadb
 RUN ansible-galaxy collection install brightcomputing.installer100 community.general community.mysql community.crypto ansible.posix
 RUN mkdir -p /ansible/group_vars
