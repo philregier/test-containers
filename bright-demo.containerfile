@@ -15,6 +15,7 @@ install_medium: network\n\
 install_medium_network_packages:\n\
   - /etc/yum.repos.d/cm.repo\n\
 license:\n\
+  country: US\n\
   cluster_name: BCM install test container" >group_vars/all
 
 RUN echo -e "[cm-rhel8-10.0-updates]\n\
