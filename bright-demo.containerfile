@@ -18,7 +18,8 @@ license:\n\
   country: US\n\
   state: Wisconsin\n\
   locality: Mount Pleasant\n\
-  organization: RedLine Performance Solutions \n\
+  organization: RedLine Performance Solutions\n\
+  organizational_unit: NACS\n\
   cluster_name: BCM install test container" >group_vars/all
 
 RUN echo -e "[cm-rhel8-10.0-updates]\n\
