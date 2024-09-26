@@ -17,6 +17,7 @@ install_medium_network_packages:\n\
 license:\n\
   country: US\n\
   state: Wisconsin\n\
+  locality: Mount Pleasant\n\
   organization: RedLine Performance Solutions \n\
   cluster_name: BCM install test container" >group_vars/all
 
