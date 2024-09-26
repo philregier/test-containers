@@ -16,6 +16,7 @@ install_medium_network_packages:\n\
   - /etc/yum.repos.d/cm.repo\n\
 license:\n\
   country: US\n\
+  statee: Wisconsin\n\
   organization: RedLine Performance Solutions \n\
   cluster_name: BCM install test container" >group_vars/all
 
