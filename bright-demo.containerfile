@@ -10,7 +10,7 @@ RUN ansible-galaxy collection install brightcomputing.installer100 community.gen
 RUN mkdir -p /ansible/group_vars
 WORKDIR /ansible
 
-RUN echo excludepkgs=shorewall >/etc/dnf/dnf.conf
+RUN echo excludepkgs=shorewall >>/etc/dnf/dnf.conf
 RUN echo -e "product_key: $CMKEY\n\
 install_medium: network\n\
 install_medium_network_packages:\n\
