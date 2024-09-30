@@ -1,4 +1,4 @@
-FROM rockylinux/rockylinux:8-ubi-init
+FROM rockylinux/rockylinux:8-ubi-init AS bcm-head-base
 ARG CMKEY
 ARG CMPASS
 
@@ -48,3 +48,20 @@ RUN echo -e "---\n\
 
 RUN sed -i 's/no_log: true/no_log: false/' /root/.ansible/collections/ansible_collections/brightcomputing/installer100/roles/head_node/tasks/install/install_distribution_packages.yml
 #CMD ansible-playbook -i $(hostname), -c local site.yml
+
+# NOTE: Stages from here on out are loosely named after BCM's Ansible tag names
+# If you want to stop at a specific stage, use `buildah --target`
+FROM bcm-head-base AS bcm-head-assertions
+RUN ansible-playbook -i $(hostname), -c local --tags always,assert_configuration,assert_system site.yml
+
+FROM bcm-head-assertions AS bcm-head-packages
+RUN ansible-playbook -i $(hostname), -c local --tags always,setup_repos,prepare,install site.yml
+
+FROM bcm-head-packages AS bcm-head-license
+RUN ansible-playbook -i $(hostname), -c local --tags always,license site.yml
+
+FROM bcm-head-license AS bcm-head-configure
+RUN ansible-playbook -i $(hostname), -c local --tags always,configure site.yml
+
+# Stop here for now; "start" task probably needs extra attention.
+# After that comes post_install, clean_up, and validate.
