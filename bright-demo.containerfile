@@ -83,4 +83,4 @@ RUN ansible-playbook -i $(hostname), -c local --tags license --skip-tags assert_
 # Stop here for now; "start" task probably needs extra attention.
 # After that comes post_install, clean_up, and validate.
 
-CMD ansible-playbook -i $(hostname), -c local --tags configure,post_install,clean_up,validate site.yml; /bin/bash
+# ansible-playbook -i $(hostname), -c local --tags configure,post_install,clean_up,validate site.yml; /bin/bash
