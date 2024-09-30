@@ -23,8 +23,8 @@ license:\n\
   organizational_unit: NACS\n\
   cluster_name: BCM install test container\n\
   mac: '{{ansible_default_ipv4.macaddress}}'\n\
-exclude_bright_packages: [shorewall]" >group_vars/all
-db_cmd_password: secret
+exclude_bright_packages: [shorewall]\n\
+db_cmd_password: secret" >group_vars/all
 
 RUN echo -e "[cm-rhel8-10.0-updates]\n\
 name=Cluster Manager 10.0 for Red Hat Enterprise Linux 8 - Updates\n\
