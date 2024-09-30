@@ -24,7 +24,8 @@ license:\n\
   cluster_name: BCM install test container\n\
   mac: '{{ansible_default_ipv4.macaddress}}'\n\
 exclude_bright_packages: [shorewall]\n\
-db_cmd_password: secret" >group_vars/all
+db_cmd_password: secret\n\
+ldap_root_pass: secret" >group_vars/all
 
 RUN echo -e "[cm-rhel8-10.0-updates]\n\
 name=Cluster Manager 10.0 for Red Hat Enterprise Linux 8 - Updates\n\
@@ -83,4 +84,4 @@ RUN ansible-playbook -i $(hostname), -c local --tags license --skip-tags assert_
 # Stop here for now; "start" task probably needs extra attention.
 # After that comes post_install, clean_up, and validate.
 
-# ansible-playbook -i $(hostname), -c local --tags configure,post_install,clean_up,validate site.yml; /bin/bash
+# ansible-playbook -i $(hostname), -c local --tags configure,post_install,clean_up,validate site.yml
