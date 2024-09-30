@@ -57,7 +57,7 @@ RUN ansible-playbook -i $(hostname), -c local --tags always,assert_configuration
 FROM bcm-head-assert-configuration AS bcm-head-assert-system
 RUN ansible-playbook -i $(hostname), -c local --tags always,assert_system site.yml
 
-FROM bcm-head-assertions AS bcm-head-packages
+FROM bcm-head-assert-system AS bcm-head-packages
 RUN ansible-playbook -i $(hostname), -c local --tags always,setup_repos,prepare,install site.yml
 
 FROM bcm-head-packages AS bcm-head-license
