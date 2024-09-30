@@ -25,7 +25,8 @@ license:\n\
   mac: '{{ansible_default_ipv4.macaddress}}'\n\
 exclude_bright_packages: [shorewall]\n\
 db_cmd_password: secret\n\
-ldap_root_pass: secret" >group_vars/all
+ldap_root_pass: secret\n\
+ldap_readonly_pass: secret" >group_vars/all
 
 RUN echo -e "[cm-rhel8-10.0-updates]\n\
 name=Cluster Manager 10.0 for Red Hat Enterprise Linux 8 - Updates\n\
