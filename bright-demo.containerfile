@@ -58,21 +58,21 @@ RUN sed -i 's/no_log: true/no_log: false/' /root/.ansible/collections/ansible_co
 # Moving it around a bit to see if it can safely be run later.
 
 FROM bcm-head-base AS bcm-head-assert-configuration
-RUN ansible-playbook -i $(hostname), -c local --tags always,assert_configuration site.yml
+RUN ansible-playbook -i $(hostname), -c local --tags assert_configuration --skip-tags assert_system site.yml
 
 # Skip step for testing
 # FROM bcm-head-assert-configuration AS bcm-head-assert-system
-# RUN ansible-playbook -i $(hostname), -c local --tags always,assert_system site.yml
+# RUN ansible-playbook -i $(hostname), -c local --tags assert_system site.yml
 
 #FROM bcm-head-assert-system AS bcm-head-packages
 FROM bcm-head-assert-configuration AS bcm-head-packages
-RUN ansible-playbook -i $(hostname), -c local --tags always,setup_repos,prepare,install site.yml
+RUN ansible-playbook -i $(hostname), -c local --tags setup_repos,prepare,install site.yml
 
 FROM bcm-head-packages AS bcm-head-license
-RUN ansible-playbook -i $(hostname), -c local --tags always,license site.yml
+RUN ansible-playbook -i $(hostname), -c local --tags license site.yml
 
 FROM bcm-head-license AS bcm-head-configure
-RUN ansible-playbook -i $(hostname), -c local --tags always,configure site.yml
+RUN ansible-playbook -i $(hostname), -c local --tags configure site.yml
 
 # Stop here for now; "start" task probably needs extra attention.
 # After that comes post_install, clean_up, and validate.
