@@ -1,6 +1,7 @@
 FROM rockylinux/rockylinux:8-ubi-init AS bcm-head-base
 ARG CMKEY
 ARG CMPASS
+ENV ANSIBLE_FORCE_COLOR=True
 
 # Note below that the default python3-xmltodict is not usable by Ansible
 RUN dnf install -y git ansible-core mariadb-server https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
