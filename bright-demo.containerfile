@@ -65,10 +65,16 @@ RUN ansible-playbook -i $(hostname), -c local --tags assert_configuration --skip
 # RUN ansible-playbook -i $(hostname), -c local --tags assert_system site.yml
 
 #FROM bcm-head-assert-system AS bcm-head-packages
-FROM bcm-head-assert-configuration AS bcm-head-packages
-RUN ansible-playbook -i $(hostname), -c local --tags setup_repos,prepare,install site.yml
+FROM bcm-head-assert-configuration AS bcm-head-setup-repos
+RUN ansible-playbook -i $(hostname), -c local --tags setup_repos site.yml
 
-FROM bcm-head-packages AS bcm-head-license
+FROM bcm-head-setup-repos AS bcm-head-prepare
+RUN ansible-playbook -i $(hostname), -c local --tags prepare site.yml
+
+FROM bcm-head-prepare AS bcm-head-install
+RUN ansible-playbook -i $(hostname), -c local --tags install site.yml
+
+FROM bcm-head-install AS bcm-head-license
 RUN ansible-playbook -i $(hostname), -c local --tags license site.yml
 
 FROM bcm-head-license AS bcm-head-configure
