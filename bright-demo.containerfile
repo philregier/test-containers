@@ -77,8 +77,10 @@ RUN ansible-playbook -i $(hostname), -c local --tags install --skip-tags assert_
 FROM bcm-head-install AS bcm-head-license
 RUN ansible-playbook -i $(hostname), -c local --tags license --skip-tags assert_system site.yml
 
-FROM bcm-head-license AS bcm-head-configure
-RUN ansible-playbook -i $(hostname), -c local --tags configure --skip-tags assert_system site.yml
+#FROM bcm-head-license AS bcm-head-configure
+#RUN ansible-playbook -i $(hostname), -c local --tags configure --skip-tags assert_system site.yml
 
 # Stop here for now; "start" task probably needs extra attention.
 # After that comes post_install, clean_up, and validate.
+
+# RUN ansible-playbook -i $(hostname), -c local --tags configure,post_install,clean_up,validate site.yml
