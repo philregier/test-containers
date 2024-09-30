@@ -51,10 +51,18 @@ RUN sed -i 's/no_log: true/no_log: false/' /root/.ansible/collections/ansible_co
 
 # NOTE: Stages from here on out are loosely named after BCM's Ansible tag names
 # If you want to stop at a specific stage, use `buildah --target`
-FROM bcm-head-base AS bcm-head-assert-configuration
-RUN ansible-playbook -i $(hostname), -c local --tags always,assert_configuration site.yml
 
-FROM bcm-head-assert-configuration AS bcm-head-assert-system
+# Canonical order, not counting always, is assert_configuration, assert_system, setup_repos, prepare,
+#  install, license, configure, start, post_install, clean_up, and validate.
+# However, assert_configuration happens to invoke systemd so it can't run during the build.
+# Moving it around a bit to see if it can safely be run later.
+
+# Skip step for testing
+# FROM bcm-head-base AS bcm-head-assert-configuration
+# RUN ansible-playbook -i $(hostname), -c local --tags always,assert_configuration site.yml
+
+# FROM bcm-head-assert-configuration AS bcm-head-assert-system
+FROM bcm-head-base AS bcm-head-assert-system
 RUN ansible-playbook -i $(hostname), -c local --tags always,assert_system site.yml
 
 FROM bcm-head-assert-system AS bcm-head-packages
